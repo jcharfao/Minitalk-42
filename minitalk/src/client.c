@@ -6,7 +6,7 @@
 /*   By: jcharfao <jcharfao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 03:48:44 by jcharfao          #+#    #+#             */
-/*   Updated: 2024/11/06 05:35:55 by jcharfao         ###   ########.fr       */
+/*   Updated: 2024/11/17 12:21:27 by jcharfao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void send_bit(int pid, char c, int bit_count)
 		if(kill(pid, SIGUSR1) == -1)
 			exit(1);
 	}
-	usleep(100);
+	usleep(1000);
 }
 
 void send_message(int pid, char *message)
@@ -45,13 +45,19 @@ void send_message(int pid, char *message)
 		}
 		i++;
 	}
+	bit_count = 0;
+    while (bit_count < 8)
+    {
+        send_bit(pid, '\0', bit_count);
+        bit_count++;
+    }
 }
 
 int main(int argc, char **argv)
 {
 	if(argc !=3)
 	{
-		printf("Error. Uso: ./client <server pid> <message to send\n");
+		printf("Error.\nUse: ./client <server pid> <message to send\n");
 		return (1);
 	}
 	int server_pid = atoi(argv[1]);
@@ -63,6 +69,5 @@ int main(int argc, char **argv)
 	char *message = argv[2];
 
 	send_message(server_pid, message);
-	printf("El mensaje se envio correctamente!!\n");
 	return (0);
 }

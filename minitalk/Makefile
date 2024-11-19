@@ -6,7 +6,7 @@
 #    By: jcharfao <jcharfao@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/06 01:25:47 by jcharfao          #+#    #+#              #
-#    Updated: 2024/11/06 05:23:10 by jcharfao         ###   ########.fr        #
+#    Updated: 2024/11/08 01:39:35 by jcharfao         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,28 +23,24 @@ CF += -I$(INC_DIR)
 # DIR
 
 SRC_DIR = src/
-
 OBJ_DIR = obj/
-
 INC_DIR = inc/
-
 LIBFT_DIR = libft/
 
 # FILES
 
-SRC_FILES_SERVER = server.c\
+SRC_FILES_SERVER = server.c
+SRC_FILES_CLIENT = client.c
 
-SRC_FILES_CLIENT = client.c\
-
-SRC_SERVER = $(addprefix $(SRC_DIR), $(SRC_FILES_SERVER:.c=.o))
-SRC_CLIENT = $(addprefix $(SRC_DIR), $(SRC_FILES_CLIENT:.c=.o))
+OBJ_FILES_SERVER = $(SRC_FILES_SERVER:.c=.o)
+OBJ_FILES_CLIENT = $(SRC_FILES_CLIENT:.c=.o)
 
 OBJ_SERVER = $(addprefix $(OBJ_DIR), $(OBJ_FILES_SERVER))
 OBJ_CLIENT = $(addprefix $(OBJ_DIR), $(OBJ_FILES_CLIENT))
 
 # LIB
 
-LIBFT_BIN =libft.a
+LIBFT_BIN = libft.a
 LIBFT = $(addprefix $(LIBFT_DIR), $(LIBFT_BIN))
 LINKER = $(LIBFT)
 

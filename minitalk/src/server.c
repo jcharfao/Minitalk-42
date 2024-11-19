@@ -6,7 +6,7 @@
 /*   By: jcharfao <jcharfao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 01:45:54 by jcharfao          #+#    #+#             */
-/*   Updated: 2024/11/06 05:33:56 by jcharfao         ###   ########.fr       */
+/*   Updated: 2024/11/17 12:15:41 by jcharfao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,14 @@ void handler(int sig)
 	bit_count++;
 	if (bit_count == 8)
 	{
-		write(1, &current_bit,1);
+		if (current_bit == '\0') // Detectar fin del mensaje
+        {
+            write(1, "\n", 1);   // Agregar salto de línea
+        }
+        else
+        {
+            write(1, &current_bit, 1);
+        }
 		bit_count = 0;
 		current_bit = 0;
 	}
